@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>사진 업로드</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+    </script>
+</head>
+<body>
+<!-- here goes input form -->
+<h1>추론할 이미지 업로드</h1>
+<b>serving api는 서버를 열어야 함</b>
+<form action="upload" method="POST" enctype="multipart/form-data">
+    <!-- serving api, internal tf 두 가지 방식을 한 페이지에 띄우고
+         한쪽만 갱신되도록 하기 위해서는 'ajax'가 필요하다. -->
+    {% csrf_token %}
+    {{ upload_form.as_p }}
+    <!-- 모델에 포함시킬 데이터가 아니라 elem으로 만듦. -->
+    <select id="comm-method" name="comm-method">
+        <option value="serving_api">Request by serving API</option>
+        <option value="internal_tf">Request by internal TF</option>
+    </select>
+    <button type="submit">추론 시작하기</button>
+</form>
+
+<!-- here goes the prediction -->
+<!--<h1>The prediction</h1>-->
+<!--<img src="{{ bboxed_image }}">-->
+</body>
+</html>
